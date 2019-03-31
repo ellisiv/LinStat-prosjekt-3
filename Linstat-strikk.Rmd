@@ -1,0 +1,29 @@
+---
+title: "Linstat-strikk"
+author: "Ellisiv"
+date: "31 mars 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+ * Description
+
+ * What is interesting, what do we know in advance, what do we want to achieve?
+
+# Set-up
+
+```{r design, include=T}
+install.packages('FrF2')
+library(FrF2)
+
+plan <- FrF2(nruns = 32, nfactors=4, randomize = F)
+plan
+
+```
+
+# 
