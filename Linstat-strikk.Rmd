@@ -12,13 +12,21 @@ knitr::opts_chunk$set(echo = TRUE)
 # Introduction
 
  * Description
+ In this project we will have a look at different parameters affec ting the memory of a person. The person will get a list of numbers, and the aim is to remember as many of the numbers in a given time, in the right order. Then there will be a 15 seconds break, followed by her writing down the numbers with a time limit of 20 seconds. The response variable is the the amount of numbers she can remember, where the last number that is right is the response. The factors that will vary are the time she gets to look at the numbers, 30 seconds and one minute, wheter she can use any aids while memorizing, if there are any distrubances during the break and wheter she is using shoes or not. 
 
  * What is interesting, what do we know in advance, what do we want to achieve?
+ Memory is an interresting topic, and highly relevant for students. Also, it could be an advantage for the test person to know how she memorizes best. 
+ 
+ 
+ 
+ This is an interresting project since we have learnt a lot about the fysics behind these kind of movements prior to this project, and want to see this simulated in real life. 
+ In advance we know that the cheering should not affect the results, that when the eraser is shot with an angle on the slingshot, the shot should be longer than without an angle and that the length of the shot should be affected by the size, shape and weight of the eraser. 
+ We want to see if the theory we know from physics coincides with our findings. 
 
 # Set-up
 
 ```{r design, include=T}
-install.packages('FrF2')
+#install.packages('FrF2')
 library(FrF2)
 
 plan <- FrF2(nruns = 32, nfactors=4, randomize = F)
