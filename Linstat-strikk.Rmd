@@ -19,7 +19,17 @@ knitr::opts_chunk$set(echo = TRUE)
  We think that the time you get to memorize the numbers and wheter you get to use aids or not, will be important factors. We also expect the consentration to weaken durint the test/forsøk/hva kaller vi det??. Therefor the order of the different factors should be random, and preferably in different orders in the two blocks. Also, we used two diffrent persons in the two blocks, and would therefor expect them to be (annerledes??? at de har noe å si på modellen, hvordan sier man det?)
  We want to see if our assumptions coincide with our findings. 
  
- 
+# Selection of factors
+Johanne
+
+# Selection og response
+Johanne
+
+# Choice of design 
+Ellisiv
+
+# Implementation
+Ellisiv
 
 # Set-up
 
