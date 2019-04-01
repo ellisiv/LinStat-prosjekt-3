@@ -30,15 +30,15 @@ library(FrF2)
 plan <- FrF2(nruns = 32, nfactors=5, randomize = F)
 #ykast <- c(2.22, 4.50, 2.88, 4.07, 2.30, 2.34, 2.00, 2.47, 2.60, 1.60, 3.98, 3.38, 2.82, 2.61, 1.88, 3.20, 2.63, 2.22, 3.38, 6.00, 4.06, 1.53, 5.70, 5.30, 2.01, 1.82, 2.60, 7.0, 1.57, 3.20, 4.00, 2.49)
 
-y <- c(9, 9, 9, 4, 6, 15, 6, 3, 11, 15, 12, 12, 5, 12, 6, 1, 9, 15, 9, 11, 12, 12, 6, 12, 12, 0, 9, 15, 7, 15, 6, 9)
+y <- c(9, 9, 9, 4, 6, 15, 6, 3, 11, 15, 12, 12, 5, 12, 6, 1, 9, 15, 9, 11, 12, 12, 6, 12, 12, 0.01, 9, 15, 7, 15, 6, 9)
 plan <- add.response(plan, y)
 #plan <- plan[, -4]
-lm4 <- lm(y~(A + B + C + D)^2 + E, data=plan)
-#summary(lm4)
+lm4 <- lm(y~(A + B + C + D)^4 + E, data=plan)
+summary(lm4)
 effects <- lm4$coeff*2
 DanielPlot(lm4)
 MEPlot(lm4)
-IAPlot(lm4)
+#IAPlot(lm4)
 cubePlot(lm4,"A","B","C")
 
 effects <- 2*lm4$coefficients[-1] # omit intercept
@@ -65,4 +65,24 @@ ad.test(rstudent(lm4))
 
 ```
 
+```{r}
+library(leaps)
+allsubs <- regsubsets(y~(A + B + C + D)^2 + E, data = plan , nvmax = 16)
+allsummary <- summary(allsubs)
+allsummary$outmat
+
+plot(allsummary$bic)
+allsummary$bic
+
+which.min(allsummary$bic)
+
+plot(allsubs, scale = "bic")
+plot(allsummary$adjr2)
+allsummary$adjr2
+
+which.max(allsummary$adjr2)
+
+plot(allsubs, scale = "adjr2")
+
+```
 
