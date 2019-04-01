@@ -15,13 +15,11 @@ knitr::opts_chunk$set(echo = TRUE)
  In this project we will have a look at different parameters affec ting the memory of a person. The person will get a list of numbers, and the aim is to remember as many of the numbers in a given time, in the right order. Then there will be a 15 seconds break, followed by her writing down the numbers with a time limit of 20 seconds. The response variable is the the amount of numbers she can remember, where the last number that is right is the response. The factors that will vary are the time she gets to look at the numbers, 30 seconds and one minute, wheter she can use any aids while memorizing, if there are any distrubances during the break and wheter she is using shoes or not. 
 
  * What is interesting, what do we know in advance, what do we want to achieve?
- Memory is an interresting topic, and highly relevant for students. Also, it could be an advantage for the test person to know how she memorizes best. 
+ Memory is an interresting topic, and highly relevant for students. Also, it could be an advantage for the test person to know how she memorizes best. Noen som har noe mer å skrive her??
+ We think that the time you get to memorize the numbers and wheter you get to use aids or not, will be important factors. We also expect the consentration to weaken durint the test/forsøk/hva kaller vi det??. Therefor the order of the different factors should be random, and preferably in different orders in the two blocks. Also, we used two diffrent persons in the two blocks, and would therefor expect them to be (annerledes??? at de har noe å si på modellen, hvordan sier man det?)
+ We want to see if our assumptions coincide with our findings. 
  
  
- 
- This is an interresting project since we have learnt a lot about the fysics behind these kind of movements prior to this project, and want to see this simulated in real life. 
- In advance we know that the cheering should not affect the results, that when the eraser is shot with an angle on the slingshot, the shot should be longer than without an angle and that the length of the shot should be affected by the size, shape and weight of the eraser. 
- We want to see if the theory we know from physics coincides with our findings. 
 
 # Set-up
 
