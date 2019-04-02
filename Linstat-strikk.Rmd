@@ -10,8 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-  Memory is one of the most important features of the human brain. Without it humans would not be able to learn a single thing, and it is necessary for the funtioning on a dily basis. 
-  An important part of the memory is the short-term memory, which is the brains capacity to remeber a small amount of information for a small period of time. from before we know that the short-term memory has about the capacity to remember seven, plus or minus two, items at the same time. Our goal is to test wheter this holds or not. 
+  Memory is one of the most important features of the human brain. Without it humans would not be able to learn anything, and it is necessary for the daily functionality. 
+  An important part of the memory is the short-term memory, which is the brains capacity to remeber a small amount of information for a small period of time. From before we know that the short-term memory has about the capacity to remember seven, plus or minus two, items at the same time. Our goal is to test wheter this holds or not. 
 
 
 Dette er det gamle jeg skrev: bare har det her for å sjekke at vi har fått med alt.
@@ -31,7 +31,12 @@ Dette er det gamle jeg skrev: bare har det her for å sjekke at vi har fått med
   Also, we think that it is easy to control that the factors are at the desired level since we can measure the time, choose to use aids or not and we can make sure of disturbance or not our self. 
 
 # Selection of response
-  A response variable that will give the desired imformation is the amount of digits the test person can remember. As mentioned, one could also conut words instead of digits. Also, we choose to count the numbers in a sequence that are at the right spot, meaning that the first spot with 
+  A response variable that will give the information we need is the number of digits the test person remembers in the right order until the first mistake, meaning that if the first digit is wrong, you get Y equal to zero, regardless of the correctness of the next digits. In theory the test person gets an infinite number of digits, but since time is limited, on can also limit the number of digits given, and still count it as infinite. One could also chose to get a finite number of digits or numbers, and count the amount that is in the right spot. 
+  
+  As mentioned, one could also count words instead of digits. Also, we choose to count the numbers in a sequence that are at the right spot, meaning that the first spot with 
+  
+  the response Y is the number of digits the test person remembers in the right order until the first mistake, meaning that if the first digit is wrong, you get Y equal to zero, no mattter if the next digits are rightly placed. 
+  there is no room for mistakes. 
   
   Do we have a suggestion for other response variables???? kan måle hukommlese på mange forskjellig måter. finner forskjllige ting for ord og tall feks. i tillegg: begynte forresrt og stoppet på den første man ikke hukset. kunne gjort dette annerledes. fyll ut. 
   
