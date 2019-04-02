@@ -31,24 +31,31 @@ Dette er det gamle jeg skrev: bare har det her for å sjekke at vi har fått med
   Also, we think that it is easy to control that the factors are at the desired level since we can measure the time, choose to use aids or not and we can make sure of disturbance or not our self. 
 
 # Selection of response
-  A response variable that will give the desired imformation is the amount of digits the test person can remember. As mentioned, one could also conut words instead of digits. Also, we choose to count the numbers in a sequence that are at the right spot, meaning that the first spot with 
+  A response variable that will give the desired imformation is the amount of digits the test person can remember.
   
-  Do we have a suggestion for other response variables???? kan måle hukommlese på mange forskjellig måter. finner forskjllige ting for ord og tall feks. i tillegg: begynte forresrt og stoppet på den første man ikke hukset. kunne gjort dette annerledes. fyll ut. 
+  Do we have a suggestion for other response variables????
   
+  How can the response variable be measured? Føler jeg egntlig har sagt det ganske klart.? hva synes du ellisiv?
   
   What can ypu say about the accuracy of these measurements?
   skal jeg her ta med typ måleusikkerheten? altså: noen tallrekker er lettere å huske en andre, at testpersonen blir sliten etterhvert, noen flere ting???
-  har 100% accuracy fordi det er kjempelett å få til hvr mange man får til. skriv dette. 
 
 
 
 # Choice of design 
-We choose a full $2^k$ factorial experiments with replicate because of the simple nature of the experiment. One full trial does not need complicated equipment and replication causes minimal resources. The only problem with doing multiple experiments is that the test person gets tired and it is hard to reset between rounds. Because of that we choose to use two different test people and do one full trial with both of them. The result is a $2^4$ factorial design with $2^5$ experiments. 
+We choose a full $2^k$ factorial experiments with replicate because of the simple nature of the experiment. One full trial does not need complicated equipment and replication causes minimal resources. The only problem with doing multiple experiments is that the test person gets tired and it is hard to reset between rounds. Because of that we choose to use two different test people and do one full trial with both of them. The result is a $2^4$ factorial design with $2^5$ experiments. Because of the different test people it is necessary to divide the design into two blocks, one block representing a test person. This is needed because the memory of the test people can differ, so the block factor needs to compensate for this. 
 
-Because of the simplicity of the experiments, it is not so hard do do a full trial and we that was the reason for choosing a full $2^k$ factorial design. To be able to analyze the results . We chose to do two full trials on the same day and on the same place to get as equal surroundings as possible. Nevertheless we chose a block design because we ran the two trials with two different test people. This was because it is hard to concentrate for a long period of time and we were afraid that exhaustion would influence the results and be hard to compensate for. With a block design where the test person represents a block we hop
+# Experimental set-up
+We chose the factors discussed above, but the value of the two levels needs to be determined and we need to choose some guidelines to make the experiments consistent. The two time intervals needs to be sufficiently different, but at the same time we do not want to have too long time intervals to cause as little as possible exhaustion for the test persons. We decide on the short interval, coded as $time = -1$, to be $30$sec and the long time interval, coded as $time = 1$, to be $60$sec. The aids provided is pen and paper and the possibility of speaking out loud. To not make this a writing contest the paper is taken away from the test person after the time for memorizing is up. To make the task a bit more challenging the test people get 15 seconds break between momorizing and writing down their final answer. This time is constant and is thus not a factor in our trials. It is also in this period the person could be disturbed. After some discussion we choose that there should just be loud talking in the background which needs no respons from the test person, or else it would be too hard to remember anything.  
+To explore the quality of our experiments, we include a variable which we assume will have no effect on the result, which is if the test person is wearing shoes. Because we do a limited amount of experiments it is interessting to see if the random variable will be included in the final model we choose.  
+There are several challenges when measuring the response variable. It is not trivial to measure the quality of an answer, what if the first digits are wrong, but others are rightly placed? And what if a digit is excluded and that shifts the order of the rest of the answer? To make the rules simple and consistent, we then decided the response, $y$, to be the number of digits rightly guessed up to the first mistake. 
 
-# Implementation
-Ellisiv
+# Experimental weaknesses
+
+
+
+We randomize the order of experiments in a trial to eliminate time as a decisive factor and we do not have the same order of experiments for our two trials. It was not a problem sticking to the randomized order, but we differed one time because of an error when reading the randomized design matrix. Anyhow, this does not cause any trouble because of the random order and the switch of order was done completely at random.   
+Nevertheless the nature of our experiments lead to some unexpected behaviour. 
 
 # Set-up
 
