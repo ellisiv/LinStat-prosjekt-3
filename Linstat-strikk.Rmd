@@ -1,13 +1,9 @@
 ---
-title: "Linstat-strikk"
-author: "Ellisiv"
-date: "31 mars 2019"
+title: "Digit-memorization"
+author: "Ellisiv Sætherø Steen, Johanne Skogvang"
+date: "05/03 2019"
 output: html_document
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Introduction
   Memory is one of the most important features of the human brain. Without it humans would not be able to learn anything, and it is necessary for the daily functionality. 
@@ -31,34 +27,58 @@ We choose a full $2^k$ factorial experiments with replicate because of the simpl
 
 # Experimental set-up
 We chose the factors discussed above, but the value of the two levels needs to be determined and we need to choose some guidelines to make the experiments consistent. The two time intervals needs to be sufficiently different, but at the same time we do not want to have too long time intervals to cause as little as possible exhaustion for the test persons. We decide on the short interval, coded as $time = -1$, to be $30$sec and the long time interval, coded as $time = 1$, to be $60$sec. The aids provided is pen and paper and the possibility of speaking out loud. To not make this a writing contest the paper is taken away from the test person after the time for memorizing is up. To make the task a bit more challenging the test people get 15 seconds break between momorizing and writing down their final answer. This time is constant and is thus not a factor in our trials. It is also in this period the person could be disturbed. After some discussion we choose that there should just be loud talking in the background which needs no respons from the test person, or else it would be too hard to remember anything.  
-To explore the quality of our experiments, we include a variable which we assume will have no effect on the result, which is if the test person is wearing shoes. Because we do a limited amount of experiments it is interessting to see if the random variable will be included in the final model we choose.  
-There are several challenges when measuring the response variable. It is not trivial to measure the quality of an answer, what if the first digits are wrong, but others are rightly placed? And what if a digit is excluded and that shifts the order of the rest of the answer? To make the rules simple and consistent, we then decided the response, $y$, to be the number of digits rightly guessed up to the first mistake. 
+To explore the quality of our experiments, we include a variable which we assume will have no effect on the result, which is if the test person is wearing shoes. Because we do a limited amount of experiments it is interessting to see if the random variable will be included in the final model we choose. To minimize the influence of the experimental order and to exlude time as a factor we randomize the order of the experiments for both trials.  
+There are several challenges when measuring the response variable. First of all the digits needs to be totally random and different every time. To solve this we use the functionality of the web-page Wolfram-Alpha. For every test run it generates a new random number with 40 digits which makes the test runs independent. Another challenge is the measurement of the quality of the response. What if the first digits are wrong, but others are rightly placed? And what if a digit is excluded and that shifts the order of the rest of the answer? To make the rules simple and consistent, we then decided the response, $y$, to be the number of digits rightly guessed up to the first mistake. 
 
-# Experimental weaknesses
-
-
-
-We randomize the order of experiments in a trial to eliminate time as a decisive factor and we do not have the same order of experiments for our two trials. It was not a problem sticking to the randomized order, but we differed one time because of an error when reading the randomized design matrix. Anyhow, this does not cause any trouble because of the random order and the switch of order was done completely at random.   
-Nevertheless the nature of our experiments lead to some unexpected behaviour. 
-
-# Set-up
+# Results
 
 ```{r design, include=T}
 #install.packages('FrF2')
 library(FrF2)
 
 plan <- FrF2(nruns = 32, nfactors=5, randomize = F)
-#ykast <- c(2.22, 4.50, 2.88, 4.07, 2.30, 2.34, 2.00, 2.47, 2.60, 1.60, 3.98, 3.38, 2.82, 2.61, 1.88, 3.20, 2.63, 2.22, 3.38, 6.00, 4.06, 1.53, 5.70, 5.30, 2.01, 1.82, 2.60, 7.0, 1.57, 3.20, 4.00, 2.49)
 
-y <- c(9, 9, 9, 4, 6, 15, 6, 3, 11, 15, 12, 12, 5, 12, 6, 1, 9, 15, 9, 11, 12, 12, 6, 12, 12, 0.01, 9, 15, 7, 15, 6, 9)
+y <- c(9, 9, 9, 4, 6, 15, 6, 3, 11, 15, 12, 12, 5, 12, 6, 1, 9, 15, 9, 11, 12, 12, 6, 12, 12, 0, 9, 15, 7, 15, 6, 9)
 plan <- add.response(plan, y)
 #plan <- plan[, -4]
 lm4 <- lm(y~(A + B + C + D)^4 + E, data=plan)
 summary(lm4)
+
+```
+The results of the experiment is shown above in the summary.  
+A1 = Long time for memorization  
+B1 = Available aids  
+C1 = Presence of disturbance  
+D1 = Wearing shoes
+E = Block factor/test person  
+Here we also find the coefficients for the full model with all interactions:
+$$y_i = 9.19 + 0.81A - 1.06B - 0.88C + 0D + 0.75E - 0.56AB + 0.75AC - 0.12AD  - 1.12BC + 0.62BD-0.69CD-0.87ABC + 0.37ABD+0.19ACD-0.56BCD-1.06ABCD$$
+It is very important to notice that none of these factors are consideres significant for the model. This means that from these results, we can not really present any results based on our data. Nevertheless, our full model has provided some new insight and we will use some time to find the factors we see as most likely to have effect on the response. But first we will take a closer look at the full model provided above and discuss what could have caused the lack of results.
+
+## Experimental weaknesses  
+```{r residual plot}
+rres <- rstudent(lm4)
+plot(lm4$fitted,rres, title("Residual plot"))
+
+qqnorm(rres)
+qqline(rres)
+
+library(nortest)
+ad.test(rstudent(lm4))
+
+```
+
+We look at the residual plot and the Anderson-Darling test and see that our residuals does not look very normally distributed. This is probably caused by some very unlikely obeservation and we therefore discuss what went wrong in the experiment to try to find an explaination. The implementation went more or less as we planned. It happened in the first trial that we read the randomized design matrix wrong and thus switched the order of two of the tests. As we see it, this did not affect the trial because the order was random and thus a random switch will not lead to a loss of randomization. We also observed that some sequences of digits were easier to remember than others. Also, the number generator had an output of blocks of three digits, and thus there were an overrepresentation in the responses of numbers dividable of three. It is also possible that the blocks made it easier to remember. These kind of factors could have lead to some extreme observations. Additionally we had some problems because of our simple measurement of response. One time the test person failed to remember the first digit, whih lead to $y=0$ even though the person remembered many other digits right.  
+Also the experiment was done in unpredictable surroundings, where people walked by and talked among other things. It was therefore a bit variety in the disturbance-factor, but it was not much difference and because of the random order, it is not unreasonable to assume that this did not affect the result much.
+We conclude that the observation deviating the most from what we could expect is the observation $y_{26}=0$. 
+
+
+```{r manipulation of data}
+
 effects <- lm4$coeff*2
 DanielPlot(lm4)
 MEPlot(lm4)
-#IAPlot(lm4)
+IAPlot(lm4)
 cubePlot(lm4,"A","B","C")
 
 effects <- 2*lm4$coefficients[-1] # omit intercept
@@ -84,6 +104,7 @@ library(nortest)
 ad.test(rstudent(lm4))
 
 ```
+
 
 ```{r}
 library(leaps)
