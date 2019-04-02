@@ -26,7 +26,9 @@ Johanne
 Johanne
 
 # Choice of design 
-Ellisiv
+We choose a full $2^k$ factorial experiments with replicate because of the simple nature of the experiment. One full trial does not need complicated equipment and replication causes minimal resources. The only problem with doing multiple experiments is that the test person gets tired and it is hard to reset between rounds. Because of that we choose to use two different test people and do one full trial with both of them. The result is a $2^4$ factorial design with $2^5$ experiments. 
+
+Because of the simplicity of the experiments, it is not so hard do do a full trial and we that was the reason for choosing a full $2^k$ factorial design. To be able to analyze the results . We chose to do two full trials on the same day and on the same place to get as equal surroundings as possible. Nevertheless we chose a block design because we ran the two trials with two different test people. This was because it is hard to concentrate for a long period of time and we were afraid that exhaustion would influence the results and be hard to compensate for. With a block design where the test person represents a block we hop
 
 # Implementation
 Ellisiv
