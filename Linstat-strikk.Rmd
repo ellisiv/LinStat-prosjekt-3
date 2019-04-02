@@ -14,36 +14,15 @@ knitr::opts_chunk$set(echo = TRUE)
   An important part of the memory is the short-term memory, which is the brains capacity to remeber a small amount of information for a small period of time. From before we know that the short-term memory has about the capacity to remember seven, plus or minus two, items at the same time. Our goal is to test wheter this holds or not. 
 
 
-Dette er det gamle jeg skrev: bare har det her for å sjekke at vi har fått med alt.
- * Description
- In this project we will have a look at different parameters affec ting the memory of a person. The person will get a list of numbers, and the aim is to remember as many of the numbers in a given time, in the right order. Then there will be a 15 seconds break, followed by her writing down the numbers with a time limit of 20 seconds. The response variable is the the amount of numbers she can remember, where the last number that is right is the response. The factors that will vary are the time she gets to look at the numbers, 30 seconds and one minute, wheter she can use any aids while memorizing, if there are any distrubances during the break and wheter she is using shoes or not. 
 
- * What is interesting, what do we know in advance, what do we want to achieve?
- Memory is an interresting topic, and highly relevant for students. Also, it could be an advantage for the test person to know how she memorizes best. Noen som har noe mer å skrive her??
- We think that the time you get to memorize the numbers and wheter you get to use aids or not, will be important factors. We also expect the consentration to weaken durint the test/forsøk/hva kaller vi det??. Therefor the order of the different factors should be random, and preferably in different orders in the two blocks. Also, we used two diffrent persons in the two blocks, and would therefor expect them to be (annerledes??? at de har noe å si på modellen, hvordan sier man det?)
- We want to see if our assumptions coincide with our findings.  
-
-
-# Selection of factors
+# Selection of factors and response  
   The first thing we tested was to memorize words. A list of wors was given to the test person, from which she tried to memorize as many words as possible. This was tested with different factors, and two different persons. Each time the number of words memorized, without exception, was six. Hence, we decided to give the same experiment a try, only exchanging worsd with digits. This resulted in a much higher variance than when we tried memorizing words. 
   The factors we think are relevant when testing the short term memory is the amount of time the test person gets to look at the digits, wheter the person is disturbed between memorizing and writing down the digits or not and wheter she is allowed to use aids, such as pen and paper, while looking at the digits. 
   We expect an interraction between time and aid, thinking that they will amplify each other. For each of the factors we think that two levels will be the most suitable, i.e. short and long time to look at the digits, disturbance or not between looking at the digits and writing the down and wheter she gets to use aids or not. One could argue for three levelsof time, but we believe that two levels will be suficient if one for example double the amount of time.
   Also, we think that it is easy to control that the factors are at the desired level since we can measure the time, choose to use aids or not and we can make sure of disturbance or not our self. 
 
-# Selection of response
-  A response variable that will give the information we need is the number of digits the test person remembers in the right order until the first mistake, meaning that if the first digit is wrong, you get Y equal to zero, regardless of the correctness of the next digits. In theory the test person gets an infinite number of digits, but since time is limited, on can also limit the number of digits given, and still count it as infinite. One could also chose to get a finite number of digits or numbers, and count the amount that is in the right spot. 
+  A response variable that will give the information we need is the number of digits the test person remembers in the right order until the first mistake, meaning that if the first digit is wrong, you get Y equal to zero, regardless of the correctness of the next digits. In theory the test person gets an infinite number of digits, but since time is limited, one can also limit the number of digits given, and still count it as infinite. One could also chose to get a finite number of digits or numbers, and count the amount that is in the right spot. There are also a lot of different variations one could do when counting the amount og numbers that the test person are able to memorize, the most important thing is that one are consistent. As mentioned, one could also count words instead of digits. The accuracy when using the first response variable is 100% since we easily can count how many digits there are until the first mistake. 
   
-  As mentioned, one could also count words instead of digits. Also, we choose to count the numbers in a sequence that are at the right spot, meaning that the first spot with 
-  
-  the response Y is the number of digits the test person remembers in the right order until the first mistake, meaning that if the first digit is wrong, you get Y equal to zero, no mattter if the next digits are rightly placed. 
-  there is no room for mistakes. 
-  
-  Do we have a suggestion for other response variables???? kan måle hukommlese på mange forskjellig måter. finner forskjllige ting for ord og tall feks. i tillegg: begynte forresrt og stoppet på den første man ikke hukset. kunne gjort dette annerledes. fyll ut. 
-  
-  How can the response variable be measured? Føler jeg egntlig har sagt det ganske klart.? hva synes du ellisiv?
-  
-  What can ypu say about the accuracy of these measurements?
-  skal jeg her ta med typ måleusikkerheten? altså: noen tallrekker er lettere å huske en andre, at testpersonen blir sliten etterhvert, noen flere ting???
 
 
 
@@ -108,7 +87,7 @@ ad.test(rstudent(lm4))
 
 ```{r}
 library(leaps)
-allsubs <- regsubsets(y~(A + B + C + D)^2 + E, data = plan , nvmax = 16)
+allsubs <- regsubsets(y~(A + B + C + D)^4 + E, data = plan , nvmax = 16)
 allsummary <- summary(allsubs)
 allsummary$outmat
 
