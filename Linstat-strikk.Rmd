@@ -43,12 +43,13 @@ Dette er det gamle jeg skrev: bare har det her for å sjekke at vi har fått med
 
 
 # Choice of design 
-We choose a full $2^k$ factorial experiments with replicate because of the simple nature of the experiment. One full trial does not need complicated equipment and replication causes minimal resources. The only problem with doing multiple experiments is that the test person gets tired and it is hard to reset between rounds. Because of that we choose to use two different test people and do one full trial with both of them. The result is a $2^4$ factorial design with $2^5$ experiments. 
-
-Because of the simplicity of the experiments, it is not so hard do do a full trial and we that was the reason for choosing a full $2^k$ factorial design. To be able to analyze the results . We chose to do two full trials on the same day and on the same place to get as equal surroundings as possible. Nevertheless we chose a block design because we ran the two trials with two different test people. This was because it is hard to concentrate for a long period of time and we were afraid that exhaustion would influence the results and be hard to compensate for. With a block design where the test person represents a block we hop
+We choose a full $2^k$ factorial experiments with replicate because of the simple nature of the experiment. One full trial does not need complicated equipment and replication causes minimal resources. The only problem with doing multiple experiments is that the test person gets tired and it is hard to reset between rounds. Because of that we choose to use two different test people and do one full trial with both of them. The result is a $2^4$ factorial design with $2^5$ experiments. Because of the different test people it is necessary to divide the design into two blocks, one block representing a test person. This is needed because the memory of the test people can differ, so the block factor needs to compensate for this. 
 
 # Implementation
-Ellisiv
+Before the testing began we determine some rules to make the experiments consistent. We choose to test The two time intervals needs to be sufficiently different, but at the same time we do not want to have too long time intervals to cause as little as possible exhaustion for the test persons. We decide on the short interval, coded as $time = -1$, to be $30$sec and the long time interval, coded as $time = 1$, to be $60$sec. The aids provided is pen and paper and the possibility of speaking out loud. To not make this a writing contest the paper is taken away from the test person after the time for memorizing is up. To make the task a bit more challenging the test person needs to keep th
+
+We randomize the order of experiments in a trial to eliminate time as a decisive factor and we do not have the same order of experiments for our two trials. It was not a problem sticking to the randomized order, but we differed one time because of an error when reading the randomized design matrix. Anyhow, this does not cause any trouble because of the random order and the switch of order was done completely at random.   
+Nevertheless the nature of our experiments lead to some unexpected behaviour. 
 
 # Set-up
 
