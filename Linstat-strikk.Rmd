@@ -7,14 +7,10 @@ output: pdf_document
 
 # Introduction
   Memory is one of the most important features of the human brain. Without it, humans would not be able to learn anything, and it is necessary for the daily functionality. 
-  An important part of the memory is the short-term memory, which is the brains capacity to remeber a small amount of information for a small period of time. If we know how to utilize our capacity in the best possible way, we will be able to remember more efficiently and hopefully 
-  
-  
-  From before, we know that the short-term memory has about the capacity to remember seven, plus or minus two, items at the same time. Our goal is to test wheter this holds or not. 
-
+  An important part of the memory is the short-term memory, which is the brains capacity to remember a small amount of information for a small period of time. If we know how to utilize our capacity in the best possible way, we will be able to remember more efficiently and this is a valuable trait in our society. This is why we in our experiment is testing which factors that can be useful and thus we can evolve our learning techniques.
 
 # Selection of factors and response  
-  The first thing we tested was to memorize words. A list of wors was given to the test person, from which she tried to memorize as many words as possible. This was tested with different factors, and two different persons. Each time the number of words memorized, without exception, was six. Hence, we decided to give the same experiment a try, only exchanging worsd with digits. This resulted in a much higher variance than when we tried memorizing words. 
+  The first plan we had was to memorize words. A list of words was given to the test person, from which she tried to memorize as many words as possible. This was tested with different factors, and two different persons. Each time the number of words memorized, without exception, was six. Hence, we decided to give the same experiment a try, only exchanging words with digits. This resulted in a much higher variance than when we tried memorizing words. 
   The factors we think are relevant when testing the short term memory is the amount of time the test person gets to look at the digits, wheter the person is disturbed between memorizing and writing down the digits or not and wheter she is allowed to use aids, such as pen and paper, while looking at the digits. 
   We expect an interraction between time and aid, thinking that they will amplify each other. For each of the factors we think that two levels will be the most suitable, i.e. short and long time to look at the digits, disturbance or not between looking at the digits and writing the down and wheter she gets to use aids or not. One could argue for three levelsof time, but we believe that two levels will be suficient if one for example double the amount of time.
   Also, we think that it is easy to control that the factors are at the desired level since we can measure the time, choose to use aids or not and we can make sure of disturbance or not our self. 
