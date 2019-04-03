@@ -1,0 +1,535 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Digit-memorization},
+            pdfauthor={Ellisiv Sætherø Steen, Johanne Skogvang},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Digit-memorization}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Ellisiv Sætherø Steen, Johanne Skogvang}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{05/03 2019}
+
+
+\begin{document}
+\maketitle
+
+\section{Introduction}\label{introduction}
+
+Memory is one of the most important features of the human brain. Without
+it, humans would not be able to learn anything, and it is necessary for
+the daily functionality. An important part of the memory is the
+short-term memory, which is the brains capacity to remeber a small
+amount of information for a small period of time. If we know how to
+utilize our capacity in the best possible way, we will be able to
+remember more efficiently and hopefully
+
+From before, we know that the short-term memory has about the capacity
+to remember seven, plus or minus two, items at the same time. Our goal
+is to test wheter this holds or not.
+
+\section{Selection of factors and
+response}\label{selection-of-factors-and-response}
+
+The first thing we tested was to memorize words. A list of wors was
+given to the test person, from which she tried to memorize as many words
+as possible. This was tested with different factors, and two different
+persons. Each time the number of words memorized, without exception, was
+six. Hence, we decided to give the same experiment a try, only
+exchanging worsd with digits. This resulted in a much higher variance
+than when we tried memorizing words. The factors we think are relevant
+when testing the short term memory is the amount of time the test person
+gets to look at the digits, wheter the person is disturbed between
+memorizing and writing down the digits or not and wheter she is allowed
+to use aids, such as pen and paper, while looking at the digits. We
+expect an interraction between time and aid, thinking that they will
+amplify each other. For each of the factors we think that two levels
+will be the most suitable, i.e.~short and long time to look at the
+digits, disturbance or not between looking at the digits and writing the
+down and wheter she gets to use aids or not. One could argue for three
+levelsof time, but we believe that two levels will be suficient if one
+for example double the amount of time. Also, we think that it is easy to
+control that the factors are at the desired level since we can measure
+the time, choose to use aids or not and we can make sure of disturbance
+or not our self.
+
+A response variable that will give the information we need is the number
+of digits the test person remembers in the right order until the first
+mistake, meaning that if the first digit is wrong, you get Y equal to
+zero, regardless of the correctness of the next digits. In theory the
+test person gets an infinite number of digits, but since time is
+limited, one can also limit the number of digits given, and still count
+it as infinite. One could also chose to get a finite number of digits or
+numbers, and count the amount that is in the right spot. There are also
+a lot of different variations one could do when counting the amount og
+numbers that the test person are able to memorize, the most important
+thing is that one are consistent. As mentioned, one could also count
+words instead of digits. The accuracy when using the first response
+variable is 100\% since we easily can count how many digits there are
+until the first mistake.
+
+\section{Choice of design}\label{choice-of-design}
+
+We choose a full \(2^k\) factorial experiments with replicate because of
+the simple nature of the experiment. One full trial does not need
+complicated equipment and replication causes minimal resources. The only
+problem with doing multiple experiments is that the test person gets
+tired and it is hard to reset between rounds. Because of that we choose
+to use two different test people and do one full trial with both of
+them. The result is a \(2^4\) factorial design with \(2^5\) experiments.
+Because of the different test people it is necessary to divide the
+design into two blocks, one block representing a test person. This is
+needed because the memory of the test people can differ, so the block
+factor needs to compensate for this.
+
+\section{Experimental set-up}\label{experimental-set-up}
+
+We chose the factors discussed above, but the value of the two levels
+needs to be determined and we need to choose some guidelines to make the
+experiments consistent. The two time intervals needs to be sufficiently
+different, but at the same time we do not want to have too long time
+intervals to cause as little as possible exhaustion for the test
+persons. We decide on the short interval, coded as \(time = -1\), to be
+\(30\)sec and the long time interval, coded as \(time = 1\), to be
+\(60\)sec.~The aids provided is pen and paper and the possibility of
+speaking out loud. To not make this a writing contest the paper is taken
+away from the test person after the time for memorizing is up. To make
+the task a bit more challenging the test people get 15 seconds break
+between momorizing and writing down their final answer. This time is
+constant and is thus not a factor in our trials. It is also in this
+period the person could be disturbed. After some discussion we choose
+that there should just be loud talking in the background which needs no
+respons from the test person, or else it would be too hard to remember
+anything.\\
+To explore the quality of our experiments, we include a variable which
+we assume will have no effect on the result, which is if the test person
+is wearing shoes. Because we do a limited amount of experiments it is
+interessting to see if the random variable will be included in the final
+model we choose. To minimize the influence of the experimental order and
+to exlude time as a factor we randomize the order of the experiments for
+both trials.\\
+There are several challenges when measuring the response variable. First
+of all the digits needs to be totally random and different every time.
+To solve this we use the functionality of the web-page Wolfram-Alpha.
+For every test run it generates a new random number with 40 digits which
+makes the test runs independent. Another challenge is the measurement of
+the quality of the response. What if the first digits are wrong, but
+others are rightly placed? And what if a digit is excluded and that
+shifts the order of the rest of the answer? To make the rules simple and
+consistent, we then decided the response, \(y\), to be the number of
+digits rightly guessed up to the first mistake.
+
+\section{Results}\label{results}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#install.packages('FrF2')}
+\KeywordTok{library}\NormalTok{(FrF2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'FrF2' was built under R version 3.5.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: DoE.base
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'DoE.base' was built under R version 3.5.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: grid
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: conf.design
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'DoE.base'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     aov, lm
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:graphics':
+## 
+##     plot.design
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     lengths
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plan <-}\StringTok{ }\KeywordTok{FrF2}\NormalTok{(}\DataTypeTok{nruns =} \DecValTok{32}\NormalTok{, }\DataTypeTok{nfactors=}\DecValTok{5}\NormalTok{, }\DataTypeTok{randomize =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## creating full factorial with 32 runs ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{11}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{)}
+\NormalTok{plan <-}\StringTok{ }\KeywordTok{add.response}\NormalTok{(plan, y)}
+\CommentTok{#plan <- plan[, -4]}
+\NormalTok{lm4 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(y}\OperatorTok{~}\NormalTok{(A }\OperatorTok{+}\StringTok{ }\NormalTok{B }\OperatorTok{+}\StringTok{ }\NormalTok{C }\OperatorTok{+}\StringTok{ }\NormalTok{D)}\OperatorTok{^}\DecValTok{4} \OperatorTok{+}\StringTok{ }\NormalTok{E, }\DataTypeTok{data=}\NormalTok{plan)}
+\KeywordTok{summary}\NormalTok{(lm4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm.default(formula = y ~ (A + B + C + D)^4 + E, data = plan)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -8.250 -1.125  0.000  1.125  8.250 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  9.188e+00  7.188e-01  12.782 1.82e-09 ***
+## A1           8.125e-01  7.188e-01   1.130    0.276    
+## B1          -1.063e+00  7.188e-01  -1.478    0.160    
+## C1          -8.750e-01  7.188e-01  -1.217    0.242    
+## D1          -5.275e-17  7.188e-01   0.000    1.000    
+## E1           7.500e-01  7.188e-01   1.043    0.313    
+## A1:B1       -5.625e-01  7.188e-01  -0.783    0.446    
+## A1:C1        7.500e-01  7.188e-01   1.043    0.313    
+## A1:D1       -1.250e-01  7.188e-01  -0.174    0.864    
+## B1:C1       -1.125e+00  7.188e-01  -1.565    0.138    
+## B1:D1        6.250e-01  7.188e-01   0.870    0.398    
+## C1:D1       -6.875e-01  7.188e-01  -0.956    0.354    
+## A1:B1:C1    -8.750e-01  7.188e-01  -1.217    0.242    
+## A1:B1:D1     3.750e-01  7.188e-01   0.522    0.609    
+## A1:C1:D1     1.875e-01  7.188e-01   0.261    0.798    
+## B1:C1:D1    -5.625e-01  7.188e-01  -0.783    0.446    
+## A1:B1:C1:D1 -1.062e+00  7.188e-01  -1.478    0.160    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.066 on 15 degrees of freedom
+## Multiple R-squared:  0.5239, Adjusted R-squared:  0.01601 
+## F-statistic: 1.032 on 16 and 15 DF,  p-value: 0.4782
+\end{verbatim}
+
+The results of the experiment is shown above in the summary.\\
+A1 = Long time for memorization\\
+B1 = Available aids\\
+C1 = Presence of disturbance\\
+D1 = Wearing shoes E = Block factor/test person\\
+For a \(2^k\) factorial experiment, we are doing inference on the main
+effects, \(2\beta_j\). The resulting model is thus
+
+\[\hat{y_i} = 9.19 + 0.81A - 1.06B - 0.88C + 0D + 0.75E - 0.56AB + 0.75AC - 0.12AD  - 1.12BC + 0.62BD-0.69CD- 0.87ABC + 0.37ABD+ 0.19ACD- 0.56BCD- 1.06ABCD\]
+We see from the p-values in the summary that none of the factors are
+characterized to be non-zero with a certainty of more than 85\%, wich is
+not good at all. We inspect the residual plot to see if this can give
+more insight in the quality of our measurements.
+
+\subsection{Experimental weaknesses}\label{experimental-weaknesses}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rres <-}\StringTok{ }\KeywordTok{rstudent}\NormalTok{(lm4)}
+\KeywordTok{plot}\NormalTok{(lm4}\OperatorTok{$}\NormalTok{fitted,rres, }\KeywordTok{title}\NormalTok{(}\StringTok{"Studentized residual plot"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linstat-strikk_files/figure-latex/residual plot-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qqnorm}\NormalTok{(rres)}
+\KeywordTok{qqline}\NormalTok{(rres)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linstat-strikk_files/figure-latex/residual plot-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(nortest)}
+\KeywordTok{ad.test}\NormalTok{(}\KeywordTok{rstudent}\NormalTok{(lm4))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Anderson-Darling normality test
+## 
+## data:  rstudent(lm4)
+## A = 1.6254, p-value = 0.0002824
+\end{verbatim}
+
+We look at the residual plot and the Anderson-Darling test and see that
+our residuals does not look very normally distributed. This is probably
+caused by some very unlikely obeservations, like the two outliers
+visible in the residual plot. We therefore discuss what went wrong in
+the experiment to try to find an explaination. The implementation went
+more or less as we planned. It happened in the first trial that we read
+the randomized design matrix wrong and thus switched the order of two of
+the tests. As we see it, this did not affect the trial because the order
+was random and thus a random switch will not lead to a loss of
+randomization. We also observed that some sequences of digits were
+easier to remember than others. Also, the number generator had an output
+of blocks of three digits, and thus there were an overrepresentation in
+the responses of numbers dividable of three. It is also possible that
+the blocks made it easier to remember. These kind of factors could have
+lead to some extreme observations. Additionally we had some problems
+because of our simple measurement of response. One time the test person
+failed to remember the first digit, whih lead to \(y=0\) even though the
+person remembered many other digits right. This is a major flaw in our
+experiment because if the test person does an early mistake it does not
+need to say much abouth his or her memory.\\
+\#Also the experiment was done in unpredictable surroundings, where
+people walked by and talked among other things. It was therefore a bit
+variety in the disturbance-factor, but it was not much difference and
+because of the random order, it is not unreasonable to assume that this
+did not affect the result much. We conclude that the observation that
+felt most problematic during the trials were observation \(y_{26}=0\).
+By inspecting our residual plot we find that two observations deviate
+significantly from the rest. Below we find that observation \(y_{26}\)
+is one of those outliers, more specifically the point with fitted value
+around 8 and residual -4.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Fitted value of observation 26: "}\NormalTok{, lm4}\OperatorTok{$}\NormalTok{fitted.values[}\DecValTok{26}\NormalTok{], }\StringTok{". Studentized residual: "}\NormalTok{, rres[}\DecValTok{26}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Fitted value of observation 26:  8.25 . Studentized residual:  -4.446832
+\end{verbatim}
+
+\subsection{Modified results}\label{modified-results}
+
+To remove the problematic outlier we have chosen to imputate the
+observation using mean substitution. We set \(y_{26}=\text{mean}(y)\)
+and fit a new model. The nice things about using mean substitution is
+that unlike removing the observation we still get the properties of a
+two-factor experiment. The main problem with doing this is that it
+provides a kind of false sense of security and we can not trust the
+results as much as the it looks like. It will also very likely lead to
+smooth out the effects of the factors. This is obvious if we use the
+same technique on more observations, and ultimately for all, then no
+factors would have any effect.
+
+This model provides more significant results and we observe from the
+Anderson-Darling test and the studentized residual plot that the
+residuals also look more like random noise. We choose to move forward
+with the new model because as we discussed above, an early mistake does
+not need to mean much about the persons memory, but we also have in mind
+that we have manipulated our data which will influence our results.
+Moving on, we analyze the new effects and use the fact that the standard
+deviation of the model is t-distributed to find the significant effects
+with significance level \(\alpha = 0.05\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{effects <-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{modified}\OperatorTok{$}\NormalTok{coeff}
+\NormalTok{effects}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept)          A1          B1          C1          D1          E1 
+##  18.9492188   2.1992188  -2.6992188  -2.3242188   0.5742187   2.0742188 
+##       A1:B1       A1:C1       A1:D1       B1:C1       B1:D1       C1:D1 
+##  -1.6992187   0.9257813   0.3242187  -1.6757812   0.6757813  -1.9492187 
+##    A1:B1:C1    A1:B1:D1    A1:C1:D1    B1:C1:D1 A1:B1:C1:D1 
+##  -1.1757812   0.1757812  -0.1992187  -0.5507812  -1.5507813
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n <-}\StringTok{ }\KeywordTok{length}\NormalTok{(ymod)}
+\NormalTok{sest <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(modified)}\OperatorTok{$}\NormalTok{sigma}
+
+\NormalTok{seffect <-}\StringTok{ }\DecValTok{2}\OperatorTok{*}\NormalTok{sest}\OperatorTok{/}\KeywordTok{sqrt}\NormalTok{(n) }\CommentTok{# SD of 2*beta-hat}
+
+\NormalTok{signcut <-}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\FloatTok{0.975}\NormalTok{,}\DataTypeTok{df=}\NormalTok{n}\OperatorTok{-}\DecValTok{2}\OperatorTok{^}\DecValTok{4}\NormalTok{)}\OperatorTok{*}\NormalTok{seffect}
+
+\KeywordTok{barplot}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{abs}\NormalTok{(effects[}\OperatorTok{-}\DecValTok{1}\NormalTok{]),}\DataTypeTok{decreasing=}\OtherTok{FALSE}\NormalTok{),}\DataTypeTok{las=}\DecValTok{1}\NormalTok{,}\DataTypeTok{horiz=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v=}\NormalTok{signcut,}\DataTypeTok{col=}\DecValTok{2}\NormalTok{,}\DataTypeTok{lwd=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Linstat-strikk_files/figure-latex/effects-1.pdf} We see
+from the bar plot that the factors \(B\) and \(C\) corresponding to
+``Available aids'' and ``Presence of disturbance'' is the only factors
+considered significant with significance level \(\alpha = 0.05\). We
+also observe that there are not any factors or interactions that really
+stick out, and this reinforces the theory that the effects would be
+smoothed out by the mean substitution. The resulting model is anyways
+
+\[y_i = 9.47 - 1.35 x_\text{aids} - 1.16 x_\text{disturbance},\] where
+\(x_\text{aids}, x_\text{disturbance} \in \{-1, 1\}\).
+
+\section{Conclusion}\label{conclusion}
+
+We have seen from the trials and the analysis afterwards that a well
+planned experiments is key. The main problem in our case was the choice
+of response, where we thought that the easiest choice would be good
+enough. Even though it is important to use a response which is easy to
+understand and measure, it looks like we could have gotten better
+results by finding a more complicated, but more accurate measurement of
+how many digits that were remembered. From the analysis we found that
+there was mainly one observation that made inference particularly hard.
+We used mean substitution on this observaton, which really improved the
+residual plots and the significance of our factors. Even though we got
+some results from our experiments, we will be carful when concluding
+because of our poor choice of response measurements and because we
+interferred with the results. Despite this, we have found some results
+indicating that the use of writing down what you want to remember
+actually does not help. Probably it is poor spending of time and from
+the execution of the experiments it seemed like the test people
+remembered the numbers better, but did not make it as far. The other
+indication was that it is harder to remember if you are in a noisy
+environment. This was hardly no surprize, but we had maybe thought that
+this would have even bigger effect and that this would be worse than
+having aids available. The other factors are harder to interprete, but
+we can see in the bar plot that factor \(D\) hat little, if any
+significance and this is completely consistent with our expectations.
+Also we can see from the summary that the second test person remembered
+a little better, and this is just expected variations in the population.
+To summarize, we would recommend doing the experiments agian with a
+slight change of response measurement. A good alternative is to count
+all the rightly placed digits and give some kind of penalty for wrongly
+placed digits. This would hopefully prevent extreme observations in the
+low area and it gives a more accurate estimate of memorization. Maybe it
+is also a good idea to exchange some of the factors. From our analysis
+it seems rather clear that shoes has nothing to do with memory, so it
+could be smart to just discard it as a facor.
+
+
+\end{document}

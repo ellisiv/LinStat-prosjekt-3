@@ -2,13 +2,15 @@
 title: "Digit-memorization"
 author: "Ellisiv Sætherø Steen, Johanne Skogvang"
 date: "05/03 2019"
-output: html_document
+output: pdf_document
 ---
 
 # Introduction
-  Memory is one of the most important features of the human brain. Without it humans would not be able to learn anything, and it is necessary for the daily functionality. 
-  An important part of the memory is the short-term memory, which is the brains capacity to remeber a small amount of information for a small period of time. From before we know that the short-term memory has about the capacity to remember seven, plus or minus two, items at the same time. Our goal is to test wheter this holds or not. 
-
+  Memory is one of the most important features of the human brain. Without it, humans would not be able to learn anything, and it is necessary for the daily functionality. 
+  An important part of the memory is the short-term memory, which is the brains capacity to remeber a small amount of information for a small period of time. If we know how to utilize our capacity in the best possible way, we will be able to remember more efficiently and hopefully 
+  
+  
+  From before, we know that the short-term memory has about the capacity to remember seven, plus or minus two, items at the same time. Our goal is to test wheter this holds or not. 
 
 
 # Selection of factors and response  
@@ -51,79 +53,75 @@ B1 = Available aids
 C1 = Presence of disturbance  
 D1 = Wearing shoes
 E = Block factor/test person  
-Here we also find the coefficients for the full model with all interactions:
-$$y_i = 9.19 + 0.81A - 1.06B - 0.88C + 0D + 0.75E - 0.56AB + 0.75AC - 0.12AD  - 1.12BC + 0.62BD-0.69CD-0.87ABC + 0.37ABD+0.19ACD-0.56BCD-1.06ABCD$$
-It is very important to notice that none of these factors are consideres significant for the model. This means that from these results, we can not really present any results based on our data. Nevertheless, our full model has provided some new insight and we will use some time to find the factors we see as most likely to have effect on the response. But first we will take a closer look at the full model provided above and discuss what could have caused the lack of results.
+For a $2^k$ factorial experiment, we are doing inference on the main effects, $2\beta_j$. The resulting model is thus
+
+$$\hat{y_i} = 9.19 + 0.81A - 1.06B - 0.88C + 0D + 0.75E - 0.56AB + 0.75AC - 0.12AD  - 1.12BC + 0.62BD-0.69CD- 0.87ABC + 0.37ABD+ 0.19ACD- 0.56BCD- 1.06ABCD$$
+We see from the p-values in the summary that none of the factors are characterized to be non-zero with a certainty of more than 85%, wich is not good at all. We inspect the residual plot to see if this can give more insight in the quality of our measurements.
 
 ## Experimental weaknesses  
 ```{r residual plot}
 rres <- rstudent(lm4)
-plot(lm4$fitted,rres, title("Residual plot"))
+plot(lm4$fitted,rres, title("Studentized residual plot"))
 
 qqnorm(rres)
 qqline(rres)
 
 library(nortest)
 ad.test(rstudent(lm4))
+```
+
+We look at the residual plot and the Anderson-Darling test and see that our residuals does not look very normally distributed. This is probably caused by some very unlikely obeservations, like the two outliers visible in the residual plot. We therefore discuss what went wrong in the experiment to try to find an explaination. The implementation went more or less as we planned. It happened in the first trial that we read the randomized design matrix wrong and thus switched the order of two of the tests. As we see it, this did not affect the trial because the order was random and thus a random switch will not lead to a loss of randomization. We also observed that some sequences of digits were easier to remember than others. Also, the number generator had an output of blocks of three digits, and thus there were an overrepresentation in the responses of numbers dividable of three. It is also possible that the blocks made it easier to remember. These kind of factors could have lead to some extreme observations. Additionally we had some problems because of our simple measurement of response. One time the test person failed to remember the first digit, whih lead to $y=0$ even though the person remembered many other digits right. This is a major flaw in our experiment because if the test person does an early mistake it does not need to say much abouth his or her memory.  
+#Also the experiment was done in unpredictable surroundings, where people walked by and talked among other things. It was therefore a bit variety in the disturbance-factor, but it was not much difference and because of the random order, it is not unreasonable to assume that this did not affect the result much.
+We conclude that the observation that felt most problematic during the trials were observation $y_{26}=0$. By inspecting our residual plot we find that two observations deviate significantly from the rest. Below we find that observation $y_{26}$ is one of those outliers, more specifically the point with fitted value around 8 and residual -4.
+```{r y=0}
+cat("Fitted value of observation 26: ", lm4$fitted.values[26], ". Studentized residual: ", rres[26])
 
 ```
 
-We look at the residual plot and the Anderson-Darling test and see that our residuals does not look very normally distributed. This is probably caused by some very unlikely obeservation and we therefore discuss what went wrong in the experiment to try to find an explaination. The implementation went more or less as we planned. It happened in the first trial that we read the randomized design matrix wrong and thus switched the order of two of the tests. As we see it, this did not affect the trial because the order was random and thus a random switch will not lead to a loss of randomization. We also observed that some sequences of digits were easier to remember than others. Also, the number generator had an output of blocks of three digits, and thus there were an overrepresentation in the responses of numbers dividable of three. It is also possible that the blocks made it easier to remember. These kind of factors could have lead to some extreme observations. Additionally we had some problems because of our simple measurement of response. One time the test person failed to remember the first digit, whih lead to $y=0$ even though the person remembered many other digits right.  
-Also the experiment was done in unpredictable surroundings, where people walked by and talked among other things. It was therefore a bit variety in the disturbance-factor, but it was not much difference and because of the random order, it is not unreasonable to assume that this did not affect the result much.
-We conclude that the observation deviating the most from what we could expect is the observation $y_{26}=0$. 
+## Modified results  
+To remove the problematic outlier we have chosen to imputate the observation using mean substitution. We set $y_{26}=\text{mean}(y)$ and fit a new model. The nice things about using mean substitution is that unlike removing the observation we still get the properties of a two-factor experiment. The main problem with doing this is that it provides a kind of false sense of security and we can not trust the results as much as the it looks like. It will also very likely lead to smooth out the effects of the factors. This is obvious if we use the same technique on more observations, and ultimately for all, then no factors would have any effect. 
+```{r modified, include=F}
+planmod <- FrF2(nruns = 32, nfactors=5, randomize = F)
+ymod <- y
+ymod[26] <- lm4$coefficients[1] #mean of the observations
+modified <- lm(ymod~(A + B + C + D)^4 + E, data=planmod)
+summary(modified)
 
+rresmod <- rstudent(modified)
+plot(modified$fitted,rresmod, title("Studentized residual plot for modified model"))
 
-```{r manipulation of data}
+qqnorm(rresmod)
+qqline(rresmod)
 
-effects <- lm4$coeff*2
-DanielPlot(lm4)
-MEPlot(lm4)
-IAPlot(lm4)
-cubePlot(lm4,"A","B","C")
-
-effects <- 2*lm4$coefficients[-1] # omit intercept
-abseffects<-abs(effects)
-medabseffects <- median(abseffects)
-tauest <- 1.5*medabseffects
-keepeffects <- abseffects[abseffects< 2.5*tauest]
-taustar <- 1.5*median(keepeffects)
-alpha<-0.05 # significance level
-cutoff<-qt(1-alpha/2,length(abseffects)/3)*taustar
-cutoff
-effects 
-
-sig <- which(abseffects>cutoff)
-DanielPlot(lm4,autolab=FALSE,faclab=list(idx=sig,lab=(paste("   ",attr(lm4$terms,"term.labels"))[sig])))
-
-rres <- rstudent(lm4)
-plot(lm4$fitted,rres)
-
-qqnorm(rres)
-qqline(rres)
 library(nortest)
-ad.test(rstudent(lm4))
+ad.test(rstudent(modified))
 
 ```
+This model provides more significant results and we observe from the Anderson-Darling test and the studentized residual plot that the residuals also look more like random noise. We choose to move forward with the new model because as we discussed above, an early mistake does not need to mean much about the persons memory, but we also have in mind that we have manipulated our data which will influence our results. 
+  Moving on, we analyze the new effects and use the fact that the standard deviation of the model is t-distributed to find the significant effects with significance level $\alpha = 0.05$.
 
+```{r effects}
+effects <- 2*modified$coeff
+effects
 
-```{r}
-library(leaps)
-allsubs <- regsubsets(y~(A + B + C + D)^4 + E, data = plan , nvmax = 16)
-allsummary <- summary(allsubs)
-allsummary$outmat
+n <- length(ymod)
+sest <- summary(modified)$sigma
 
-plot(allsummary$bic)
-allsummary$bic
+seffect <- 2*sest/sqrt(n) # SD of 2*beta-hat
 
-which.min(allsummary$bic)
+signcut <- qt(0.975,df=n-2^4)*seffect
 
-plot(allsubs, scale = "bic")
-plot(allsummary$adjr2)
-allsummary$adjr2
-
-which.max(allsummary$adjr2)
-
-plot(allsubs, scale = "adjr2")
-
+barplot(sort(abs(effects[-1]),decreasing=FALSE),las=1,horiz=TRUE)
+abline(v=signcut,col=2,lwd=2)
 ```
+We see from the bar plot that the factors $B$ and $C$ corresponding to "Available aids" and "Presence of disturbance" is the only factors considered significant with significance level $\alpha = 0.05$. We also observe that there are not any factors or interactions that really stick out, and this reinforces the theory that the effects would be smoothed out by the mean substitution. The resulting model is anyways
+
+$$y_i = 9.47 - 1.35 x_\text{aids} - 1.16 x_\text{disturbance},$$ where $x_\text{aids}, x_\text{disturbance} \in \{-1, 1\}$.
+
+# Conclusion
+We have seen from the trials and the analysis afterwards that a well planned experiments is key. The main problem in our case was the choice of response, where we thought that the easiest choice would be good enough. Even though it is important to use a response which is easy to understand and measure, it looks like we could have gotten better results by finding a more complicated, but more accurate measurement of how many digits that were remembered.
+  From the analysis we found that there was mainly one observation that made inference particularly hard. We used mean substitution on this observaton, which really improved the residual plots and the significance of our factors. 
+  Even though we got some results from our experiments, we will be carful when concluding because of our poor choice of response measurements and because we interferred with the results. Despite this, we have found some results indicating that the use of writing down what you want to remember actually does not help. Probably it is poor spending of time and from the execution of the experiments it seemed like the test people remembered the numbers better, but did not make it as far. The other indication was that it is harder to remember if you are in a noisy environment. This was hardly no surprize, but we had maybe thought that this would have even bigger effect and that this would be worse than having aids available.
+  The other factors are harder to interprete, but we can see in the bar plot that factor $D$ hat little, if any significance and this is completely consistent with our expectations. Also we can see from the summary that the second test person remembered a little better, and this is just expected variations in the population.
+  To summarize, we would recommend doing the experiments agian with a slight change of response measurement. A good alternative is to count all the rightly placed digits and give some kind of penalty for wrongly placed digits. This would hopefully prevent extreme observations in the low area and it gives a more accurate estimate of memorization. Maybe it is also a good idea to exchange some of the factors. From our analysis it seems rather clear that shoes has nothing to do with memory, so it could be smart to just discard it as a facor.
 
